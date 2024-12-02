@@ -1,10 +1,11 @@
+use day_01::{parse_input, process_input_stage_one, total_distance};
 use std::error::Error;
 use std::fs;
+use std::path::PathBuf;
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::path::PathBuf;
 
     // Helper function to get test data directory
     fn get_test_data_path(file_name: &str) -> PathBuf {
