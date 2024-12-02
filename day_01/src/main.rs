@@ -1,5 +1,6 @@
 use std::env;
 use std::error::Error;
+use std::fs;
 
 fn process_input_stage_one(input: &str) -> Result<i32, Box<dyn Error>> {
     let (left, right) = parse_input(input)?;
@@ -31,12 +32,33 @@ fn parse_input(input: &str) -> Result<(Vec<i32>, Vec<i32>), Box<dyn Error>> {
     Ok((left, right))
 }
 
-fn main() {
-    let filename = env::args().nth(1).ok_or("Usage: day_one [file_name]");
-    let input = read_to_string(filename)?;
+fn total_distance(mut left: Vec<i32>, mut right: Vec<i32>) -> i32 {
+    left.sort_unstable();
+    right.sort_unstable();
+
+    return left
+        .iter()
+        .zip(right.iter())
+        .map(|(a, b)| (a - b).abs())
+        .sum();
+}
+
+fn main() -> Result<(), Box<dyn Error>> {
+    let arguments: Vec<String> = env::args().collect();
+
+    let expected_arguments: usize = 2;
+    let filename_position: usize = 1;
+
+    if arguments.len() != expected_arguments {
+        panic!("Useage: day_one [file_name]");
+    }
+
+    let filename = &arguments[filename_position];
+    let input = fs::read_to_string(filename)?;
     let result = process_input_stage_one(&input);
 
     println!("Part one: {:?}", result);
     println!("Part two: TODO");
-    Ok(());
+
+    return Ok(());
 }
