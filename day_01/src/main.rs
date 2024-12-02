@@ -2,12 +2,12 @@ use std::env;
 use std::error::Error;
 use std::fs;
 
-fn process_input_stage_one(input: &str) -> Result<i32, Box<dyn Error>> {
+pub fn process_input_stage_one(input: &str) -> Result<i32, Box<dyn Error>> {
     let (left, right) = parse_input(input)?;
     Ok(total_distance(left, right))
 }
 
-fn parse_input(input: &str) -> Result<(Vec<i32>, Vec<i32>), Box<dyn Error>> {
+pub fn parse_input(input: &str) -> Result<(Vec<i32>, Vec<i32>), Box<dyn Error>> {
     let parse_line = |line: &str| -> Result<(i32, i32), Box<dyn Error>> {
         let numbers: Vec<i32> = line
             .split_whitespace()
@@ -32,7 +32,7 @@ fn parse_input(input: &str) -> Result<(Vec<i32>, Vec<i32>), Box<dyn Error>> {
     Ok((left, right))
 }
 
-fn total_distance(mut left: Vec<i32>, mut right: Vec<i32>) -> i32 {
+pub fn total_distance(mut left: Vec<i32>, mut right: Vec<i32>) -> i32 {
     left.sort_unstable();
     right.sort_unstable();
 
