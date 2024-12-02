@@ -1,0 +1,4 @@
+target/*
+my_input.txt
+*.lock
+*.env
